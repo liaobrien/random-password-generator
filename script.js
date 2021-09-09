@@ -1,11 +1,7 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+document.querySelector("#generate").addEventListener("click", writePassword);
 
 // all the possible characters a random password can contain
-var specialChar = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "{", "}", "~"];
+var specialChars = ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "{", "}", "~"];
 var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var upperCaseLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var lowerCaseLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -18,22 +14,33 @@ function generatePassword() {
   // return password;
   charLength = prompt("How many characters would you like your password to be? Put a number between 8 and 128.");
   if (!charLength) {
-    alert("Please enter a value between 8 and 128.")
+    alert("This cannot be left blank.")
     return generatePassword();
   }
+  else if (8 > charLength > 128) {
+    alert("Value not within valid range.")
+    return generatePassword();
+  }
+  else if (8 < charLength < 128) {
+    var specialCharResponse = confirm("Click 'Ok' to include special characters.");
+    var numberResponse = confirm("Click 'Ok' to include numbers.");
+    var upperResponse = confirm("Click 'Ok' to include uppercase letters.");
+    var lowerResponse = confirm("Click 'Ok' to include lowercase letters.");
+  }
+  var passwordCharacters = []
+  if (specialCharResponse) {
+    passwordCharacters = passwordCharacters.concat(specialChars);
+  }
 
-}
+  if (numberResponse) {
+    passwordCharacters = passwordCharacters.concat(numbers);
+  }
 
-
-
-function passwordLength() {
-
-}
-
-function specialCharacters() {
-  var specialChar = confirm("Click 'Ok' to include special characters");
-  if (specialChar === true) {
-    numbers();
+  if (upperResponse) {
+    passwordCharacters = passwordCharacters.concat(upperCaseLetters);
+  }
+  if (lowerResponse) {
+    passwordCharacters = passwordCharacters.concat(lowerCaseLetters);
   }
 }
 
