@@ -26,34 +26,35 @@ function generatePassword() {
     var upperResponse = confirm("Click 'OK' to include uppercase letters.");
     var lowerResponse = confirm("Click 'OK' to include lowercase letters.");
     if (specialCharResponse === false && numberResponse === false && upperResponse === false && lowerResponse === false) {
-      alert("You must choose at least one group of characters to include.")
+      alert("You must choose at least one group of characters to include.");
     }
   }
 
   // making a new array combining my global arrays above
-  var passwordCharacters = []
+  var allCharacters = []
   if (specialCharResponse) {
-    passwordCharacters = passwordCharacters.concat(specialChars);
+    allCharacters = allCharacters.concat(specialChars);
   }
 
   if (numberResponse) {
-    passwordCharacters = passwordCharacters.concat(numbers);
+    allCharacters = allCharacters.concat(numbers);
   }
 
   if (upperResponse) {
-    passwordCharacters = passwordCharacters.concat(upperCaseLetters);
+    allCharacters = allCharacters.concat(upperCaseLetters);
   }
   if (lowerResponse) {
-    passwordCharacters = passwordCharacters.concat(lowerCaseLetters);
+    allCharacters = allCharacters.concat(lowerCaseLetters);
   }
 
-  console.log(passwordCharacters);
+  // to verify that the above code works properly
+  console.log(allCharacters);
 
-  var randomPassword = ""
+  var randomPassword = "";
 
   // randomizes the array i made above and translates it into the random password based on character length request
   for (var i = 0; i < charLength; i++) {
-    randomPassword = randomPassword + passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)];
+    randomPassword = randomPassword + allCharacters[Math.floor(Math.random() * allCharacters.length)];
     console.log(randomPassword);
   }
   return randomPassword;
